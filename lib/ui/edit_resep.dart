@@ -147,6 +147,7 @@ class _EditScreenState extends State<EditScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Resep'),
+        centerTitle: true,
         backgroundColor: Color.fromRGBO(255, 113, 42, 1),
       ),
       body: Padding(
@@ -237,7 +238,7 @@ class _EditScreenState extends State<EditScreen> {
                     ? 'Langkah memasak tidak boleh kosong'
                     : null,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 16),
               _isLoading
                   ? Center(child: CircularProgressIndicator())
                   : SizedBox(

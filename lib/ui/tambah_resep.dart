@@ -112,138 +112,134 @@ class _TambahScreenState extends State<TambahScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tambah Resep Baru"),
+        title: Text('Edit Resep'),
         centerTitle: true,
         backgroundColor: Color.fromRGBO(255, 113, 42, 1),
-        elevation: 0,
       ),
-      body: Container(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: SingleChildScrollView(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              TextFormField(
+                controller: _titleController,
+                decoration: InputDecoration(
+                  labelText: "Judul Resep",
+                  labelStyle: TextStyle(color: Color.fromRGBO(255, 113, 42, 1)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromRGBO(255, 113, 42, 1),
+                      width: 2,
                     ),
-                  ],
+                  ),
                 ),
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const Text(
-                      "Formulir Tambah Resep",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
+                validator: (value) => value == null || value.isEmpty
+                    ? 'Judul tidak boleh kosong'
+                    : null,
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: _descriptionController,
+                maxLines: 3,
+                decoration: InputDecoration(
+                  labelText: "Deskripsi",
+                  labelStyle: TextStyle(color: Color.fromRGBO(255, 113, 42, 1)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromRGBO(255, 113, 42, 1),
+                      width: 2,
                     ),
-                    const SizedBox(height: 40),
-                    TextFormField(
-                      controller: _titleController,
-                      decoration: InputDecoration(
-                        labelText: "Judul Resep",
-                        labelStyle: const TextStyle(color: Colors.black54),
-                        filled: true,
-                        fillColor: Colors.orange[50],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                  ),
+                ),
+                validator: (value) => value == null || value.isEmpty
+                    ? 'Deskripsi tidak boleh kosong'
+                    : null,
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: _ingredientsController,
+                maxLines: 5,
+                decoration: InputDecoration(
+                  labelText: "Bahan-Bahan",
+                  labelStyle: TextStyle(color: Color.fromRGBO(255, 113, 42, 1)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromRGBO(255, 113, 42, 1),
+                      width: 2,
                     ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _cookingMethodController,
-                      decoration: InputDecoration(
-                        labelText: "Langkah Memasak",
-                        labelStyle: const TextStyle(color: Colors.black54),
-                        filled: true,
-                        fillColor: Colors.orange[50],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
+                  ),
+                ),
+                validator: (value) => value == null || value.isEmpty
+                    ? 'Bahan-bahan tidak boleh kosong'
+                    : null,
+              ),
+              SizedBox(height: 16),
+              TextFormField(
+                controller: _cookingMethodController,
+                maxLines: 5,
+                decoration: InputDecoration(
+                  labelText: "Langkah Memasak",
+                  labelStyle: TextStyle(color: Color.fromRGBO(255, 113, 42, 1)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromRGBO(255, 113, 42, 1),
+                      width: 2,
                     ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _ingredientsController,
-                      decoration: InputDecoration(
-                        labelText: "Bahan-Bahan",
-                        labelStyle: const TextStyle(color: Colors.black54),
-                        filled: true,
-                        fillColor: Colors.orange[50],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                      maxLines: 3,
+                  ),
+                ),
+                validator: (value) => value == null || value.isEmpty
+                    ? 'Langkah memasak tidak boleh kosong'
+                    : null,
+              ),
+              const SizedBox(height: 16),
+              _photo == null
+                  ? const Text('Tidak Ada Gambar Yang Dipilih')
+                  : Image.file(
+                      _photo!,
+                      height: 200,
+                      fit: BoxFit.cover,
                     ),
-                    const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _descriptionController,
-                      decoration: InputDecoration(
-                        labelText: "Deskripsi",
-                        labelStyle: const TextStyle(color: Colors.black54),
-                        filled: true,
-                        fillColor: Colors.orange[50],
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                      maxLines: 3,
-                    ),
-                    const SizedBox(height: 16),
-                    _photo == null
-                        ? const Text('Tidak Ada Gambar Yang Dipilih')
-                        : Image.file(
-                            _photo!,
-                            height: 200,
-                            fit: BoxFit.cover,
-                          ),
-                    ElevatedButton(
-                      onPressed: _showImageSourceActionSheet,
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: _showImageSourceActionSheet,
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  backgroundColor: Colors.orange,
+                ),
+                child: const Text('Pilih Gambar'),
+              ),
+              const SizedBox(height: 16),
+              _isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : ElevatedButton(
+                      onPressed: _submitRecipe,
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
                         backgroundColor: Colors.orange,
+                        elevation: 4,
                       ),
-                      child: const Text('Pilih Gambar'),
+                      child: const Text('Simpan Resep'),
                     ),
-                    const SizedBox(height: 16),
-                    _isLoading
-                        ? const Center(child: CircularProgressIndicator())
-                        : ElevatedButton(
-                            onPressed: _submitRecipe,
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              backgroundColor: Colors.orange,
-                              elevation: 4,
-                            ),
-                            child: const Text('Simpan Resep'),
-                          ),
-                  ],
-                ),
-              ),
-            ),
+            ],
           ),
         ),
       ),

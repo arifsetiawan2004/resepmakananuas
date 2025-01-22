@@ -22,8 +22,15 @@ class RegisterScreen extends StatelessWidget {
       );
 
       if (response["status"]) {
-        // Jika registrasi berhasil, arahkan kembali ke halaman login
-        Navigator.pushNamed(context, '/home');
+        // Jika registrasi berhasil, tampilkan pesan registrasi berhasil
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(
+                  "Registrasi Berhasil! Silahkan Log In untuk masuk ke akun anda.")),
+        );
+
+        // Arahkan kembali ke halaman login
+        Navigator.pushNamed(context, '/login');
       }
     } catch (e) {
       print(e);
